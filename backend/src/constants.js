@@ -8,6 +8,8 @@ const messages = {
   health: `${project.name} backend is running`,
   notFound: 'Not found',
   serverStarted: `${project.id} backend listening`,
+  badJson: '请求体不是有效的 JSON',
+  internalError: '服务器内部错误，请稍后再试',
 };
 
 module.exports = {

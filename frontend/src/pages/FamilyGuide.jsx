@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { communicationTips, bodyChanges, practicalAdvice } from '../data/familyGuide';
+import CareBoard from '../components/CareBoard';
 
 const FamilyGuide = () => {
   const [activeTab, setActiveTab] = useState('communication');
@@ -8,7 +9,8 @@ const FamilyGuide = () => {
   const tabs = [
     { id: 'communication', label: '沟通技巧', icon: '💬' },
     { id: 'body', label: '身体变化', icon: '📋' },
-    { id: 'practical', label: '实用建议', icon: '💡' }
+    { id: 'practical', label: '实用建议', icon: '💡' },
+    { id: 'handover', label: '照护交接', icon: '🤝' }
   ];
 
   return (
@@ -210,6 +212,7 @@ const FamilyGuide = () => {
               </div>
             </div>
           )}
+          {activeTab === 'handover' && <CareBoard />}
         </div>
       </main>
 

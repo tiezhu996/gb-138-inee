@@ -26,6 +26,25 @@ docker compose down -v --remove-orphans
 - 临终关怀知识导航
 - 症状照护与心理支持信息
 - 资源、愿望清单和家属指南
+- 家属指南 · 照护交接板：记录待办、完成留档、收班交接给下一位家人（数据存于 PostgreSQL，服务重启后保留）
+
+## 照护交接板 API
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| GET | /api/care/board | 交接板总览：当前负责人、待办数量、最近交接时间、待办/已完成事项、交接记录 |
+| POST | /api/care/person | 首次设置负责人（`{ "name": "妈妈" }`，已设置则 409） |
+| POST | /api/care/tasks | 新增待办（`{ "title": "8点喂药" }`，记在现任负责人名下） |
+| POST | /api/care/tasks/:id/complete | 完成名下待办，转入已完成留档 |
+| POST | /api/care/handover | 交接班（`{ "toPerson": "爸爸" }`）；无待办或接手人仍是当前负责人时拒绝，状态保持不变 |
+
+后端测试：
+
+```bash
+cd backend
+npm install
+npm test
+```
 
 ## 本地开发
 
