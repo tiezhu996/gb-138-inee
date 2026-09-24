@@ -35,6 +35,9 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
+      DATA_FILE: /app/data/handover.json
+    volumes:
+      - handover_data:/app/data
     ports:
       - "${BACKEND_PORT:-3238}:3000"
     depends_on:
@@ -60,3 +63,4 @@ services:
 
 volumes:
   db_data:
+  handover_data:

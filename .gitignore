@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# 照护交接板本地持久化数据（Docker 部署使用 handover_data 命名卷）
+backend/data/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

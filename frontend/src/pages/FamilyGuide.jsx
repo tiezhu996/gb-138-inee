@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { communicationTips, bodyChanges, practicalAdvice } from '../data/familyGuide';
+import HandoverBoard from '../components/HandoverBoard';
 
 const FamilyGuide = () => {
   const [activeTab, setActiveTab] = useState('communication');
@@ -8,7 +9,8 @@ const FamilyGuide = () => {
   const tabs = [
     { id: 'communication', label: '沟通技巧', icon: '💬' },
     { id: 'body', label: '身体变化', icon: '📋' },
-    { id: 'practical', label: '实用建议', icon: '💡' }
+    { id: 'practical', label: '实用建议', icon: '💡' },
+    { id: 'handover', label: '照护交接板', icon: '🔄' }
   ];
 
   return (
@@ -54,12 +56,12 @@ const FamilyGuide = () => {
         </div>
 
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-lg border border-white/60">
+          <div className="inline-flex bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-lg border border-white/60 max-w-full overflow-x-auto">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
+                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg'
                     : 'text-warm-600 hover:bg-emerald-50'
@@ -72,6 +74,25 @@ const FamilyGuide = () => {
           </div>
         </div>
 
+        {activeTab === 'handover' ? (
+          <div className="max-w-4xl mx-auto space-y-10">
+            <div className="relative overflow-hidden bg-gradient-to-r from-violet-500 to-purple-600 rounded-3xl p-10 text-white shadow-xl">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="relative">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm mb-5">
+                  <span className="text-4xl">🔄</span>
+                </div>
+                <h3 className="text-3xl font-bold mb-4">照护交接板</h3>
+                <p className="text-white/90 text-lg leading-relaxed">
+                  家属轮流照护时，口头交代的事项容易遗漏。接班家属可以在此写下待办，
+                  当前负责人完成自己名下的事项；收班时选择另一位家人交接，
+                  未完成事项自动转交，已完成事项和每次交接都会留档。
+                </p>
+              </div>
+            </div>
+            <HandoverBoard />
+          </div>
+        ) : (
         <div className="max-w-4xl mx-auto">
           {activeTab === 'communication' && (
             <div className="space-y-6">
@@ -211,6 +232,7 @@ const FamilyGuide = () => {
             </div>
           )}
         </div>
+        )}
       </main>
 
       <footer className="relative bg-gradient-to-r from-emerald-800 to-teal-900 text-white/80 py-10 mt-20">
